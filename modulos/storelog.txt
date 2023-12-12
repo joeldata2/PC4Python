@@ -1,0 +1,7 @@
+log[2023-12-04 00:27:36.170379]-[-gianzk-listo los products]
+log[2023-12-04 01:27:55.056390]-[-gianzk-listo los products]
+log[2023-12-04 01:46:03.243306]-[-sam-creo un producto-pelicula ,5.0,3 ]
+log[2023-12-04 01:46:14.900570]-[-sam-listo los products]
+log[2023-12-04 01:47:02.832211]-[-sam-se actualizao un producto con id2]
+log[2023-12-04 01:47:05.310563]-[-sam-listo los products]
+log[2023-12-04 01:48:05.911410]-[-gian-listo los products]
