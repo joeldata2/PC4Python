@@ -1,5 +1,12 @@
+#!pip install pyfiglet
+
 import modulos.bd as bd
 from modulos.proceso import *
+from pyfiglet import Figlet
+
+figlet = Figlet()
+figlet.getFonts()
+figlet.setFont(font='rectangles')
 
 database=None
 def main():
@@ -12,12 +19,14 @@ def main():
             init=False
             config() ## ejecutar las consideraciones basicas al iniciar la aplicacion
         opciones="""
-        Bienvenidos a store DatuxTec
         1. Crear producto
         2. Listar productos
         3. Editar nombre de producto 
         4. Eliminar producto
         5. Salir"""
+        figlet = Figlet()
+        figlet.setFont(font='rectangles')
+        print(figlet.renderText("Bienvenidos a store DatuxTec"))
         print(opciones)
         opc=int(input("ingrese una opcion: "))
         if opc==1:
@@ -47,7 +56,29 @@ def config():
                     stock INTEGER NOT NULL
                 );
     """
+    #{"compra":3.762,"venta":3.774,"origen":"SUNAT","moneda":"USD","fecha":"2023-12-12"}
+    query_tipo_cambio="""
+        CREATE TABLE  IF NOT EXISTS tipo_cambio (
+                    id_tipo_cambio INTEGER PRIMARY KEY,
+                    compra FLOAT NOT NULL,
+                    venta FLOAT NULL,
+                    origen VARCHAR(20) NOT NULL,
+                    moneda VARCHAR(5) NOT NULL,
+                    fecha DATETIME NOT NULL
+                );
+    """
+    query_cliente="""
+        CREATE TABLE  IF NOT EXISTS cliente (
+                    id_cliente INTEGER PRIMARY KEY,
+                    name_cliente VARCHAR(100) NOT NULL,
+                    codigo_postal NVARCHAR(20) NOT NULL,
+                    pais VARCHAR(50) NOT NULL
+                );
+    """
+
     database.execute_query(query_products)
+    database.execute_query(query_tipo_cambio)
+    database.execute_query(query_cliente)
 
 
 if __name__=='__main__':
