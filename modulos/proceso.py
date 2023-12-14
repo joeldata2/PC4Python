@@ -72,6 +72,24 @@ def editar_nombre(user):
         loogeinfo=f"-{user}-error al actualizar EL PRODUCTO -{e}  "
         logger.register_log(loogeinfo)
 
+def buscar_producto_por_nombre(user):
+    nombre = input("Ingrese el nombre del producto a buscar: ")
+    query = f"SELECT * FROM products WHERE name LIKE '%{nombre}%'"
+    try:
+        data = BdIv2.get_data(query)
+        if not data:
+            print(f"No se encontró ningún producto con el nombre '{nombre}'.")
+            return
+        loogeinfo = f"-{user}-buscó el producto por nombre: {nombre}"
+        logger.register_log(loogeinfo)
+        print("Productos encontrados:")
+        print('id|nombre|price|stock')
+        for i in data:
+            print(i[0], i[1], i[2], i[3])
+    except Exception as e:
+        loogeinfo = f"-{user}-error al buscar el producto por nombre - {e}"
+        logger.register_log(loogeinfo)
+
 class Cliente:
     def __init__(self, nombre, direccion, telefono) -> None:
         self.nombre = nombre
@@ -109,6 +127,36 @@ def listar_clientes(user):
             print(i[0], i[1], i[2], i[3])
     except Exception as e:
         loogeinfo = f"-{user}-error al listar los clientes - {e}"
+        logger.register_log(loogeinfo)
+
+def editar_precio(user):
+    print("Actualizar precio del producto")
+    id_producto = input("Ingrese el ID del producto a actualizar: ")
+    nuevo_precio = float(input("Ingrese el nuevo precio: "))
+
+    query = f"UPDATE products SET price = {nuevo_precio} WHERE id = {id_producto};"
+
+    try:
+        BdIv2.execute_query(query)
+        loogeinfo = f"-{user}-se actualizó el precio del producto con id {id_producto}"
+        logger.register_log(loogeinfo)
+    except Exception as e:
+        loogeinfo = f"-{user}-error al actualizar el precio del producto - {e}"
+        logger.register_log(loogeinfo)
+
+def editar_stock(user):
+    print("Actualizar stock del producto")
+    id_producto = input("Ingrese el ID del producto a actualizar: ")
+    nuevo_stock = int(input("Ingrese el nuevo stock: "))
+
+    query = f"UPDATE products SET stock = {nuevo_stock} WHERE id = {id_producto};"
+
+    try:
+        BdIv2.execute_query(query)
+        loogeinfo = f"-{user}-se actualizó el stock del producto con id {id_producto}"
+        logger.register_log(loogeinfo)
+    except Exception as e:
+        loogeinfo = f"-{user}-error al actualizar el stock del producto - {e}"
         logger.register_log(loogeinfo)
 
 ## en caso queremos hacer una busqeuda al final del select * from tabla se agrega 

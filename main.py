@@ -20,13 +20,18 @@ def main():
             init=False
             config() ## ejecutar las consideraciones basicas al iniciar la aplicacion
         opciones="""
-        1. Crear producto
-        2. Listar productos
-        3. Editar nombre de producto 
-        4. Eliminar producto
-        5. Consultar tipo de cambio
-        6. Actualizar tipo de cambio
-        7. Salir"""
+        1.  Crear producto
+        2.  Listar productos
+        3.  Editar nombre de producto 
+        4.  Eliminar producto
+        5.  Consultar tipo de cambio
+        6.  Actualizar tipo de cambio
+        7.  Agregar cliente 
+        8.  Listar clientes 
+        9.  Editar precio 
+        10. Editar stock 
+        11. Buscar producto   
+        12. Salir"""
         figlet = Figlet()
         figlet.setFont(font='rectangles')
         print(figlet.renderText("Bienvenidos a store DatuxTec"))
@@ -45,6 +50,16 @@ def main():
         elif opc==6:
             actualizar_tipo_cambio(user)
         elif opc==7:
+            agregar_cliente(user)
+        elif opc==8:
+            listar_clientes(user)
+        elif opc==9:
+            editar_precio(user)
+        elif opc==10:
+            editar_stock(user)
+        elif opc==11:
+            buscar_producto_por_nombre(user) 
+        elif opc==12:
             salir=True
             print("terminando sesion....")
             break
@@ -75,7 +90,7 @@ def config():
                 );
     """
     query_cliente="""
-        CREATE TABLE  IF NOT EXISTS cliente (
+        CREATE TABLE IF NOT EXISTS cliente (
                     id_cliente INTEGER PRIMARY KEY,
                     name_cliente VARCHAR(100) NOT NULL,
                     direccion VARCHAR(200) NOT NULL,
@@ -84,8 +99,6 @@ def config():
     """
     #"""DROP TABLE IF EXISTS cliente;"""
     
-
-
     database.execute_query(query_products)
     database.execute_query(query_tipo_cambio)
     database.execute_query(query_cliente)
@@ -99,8 +112,5 @@ if __name__=='__main__':
 
 if __name__ == "__main__":
     user = "Joel"  # Reemplaza con el nombre de usuario adecuado
-
-    # Ejecutar directamente las funciones
-    agregar_cliente(user)
-    #listar_clientes(user)
-    config()
+    consultar_tipo_cambio(user)
+    buscar_producto_por_nombre(user)

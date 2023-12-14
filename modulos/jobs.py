@@ -40,7 +40,7 @@ def insertar_tipo_cambio_en_db(tipo_cambio):
     conexion.commit()
     conexion.close()
 
-def actualizar_tipo_cambio():
+def actualizar_tipo_cambio(user):
     tipo_cambio = obtener_tipo_cambio()
 
     if tipo_cambio:
@@ -49,7 +49,7 @@ def actualizar_tipo_cambio():
     else:
         print("No se pudo obtener el tipo de cambio.")
 
-def consultar_tipo_cambio():
+def consultar_tipo_cambio(user):
     conexion = sqlite3.connect('bd.Bd')
     cursor = conexion.cursor()
 
@@ -65,10 +65,3 @@ def consultar_tipo_cambio():
 
     # Cerrar la conexión
     conexion.close()
-
-# consultar el tipo de cambio
-consultar_tipo_cambio()
-
-#actualizar el tipo de cambio
-actualizar_tipo_cambio()
-
