@@ -72,7 +72,45 @@ def editar_nombre(user):
         loogeinfo=f"-{user}-error al actualizar EL PRODUCTO -{e}  "
         logger.register_log(loogeinfo)
 
+class Cliente:
+    def __init__(self, nombre, direccion, telefono) -> None:
+        self.nombre = nombre
+        self.direccion = direccion
+        self.telefono = telefono
 
+    def tuplaDatos(self):
+        return (self.nombre, self.direccion, self.telefono)
+
+def agregar_cliente(user):
+    BdI = Bd()
+    print("Ingrese información del cliente")
+    nombre = input("Ingrese el nombre del cliente: ")
+    direccion = input("Ingrese la dirección del cliente: ")
+    telefono = int(input("Ingrese el teléfono del cliente: "))
+    cliente = Cliente(nombre, direccion, telefono)
+    try:
+        query = f"INSERT INTO cliente(name_cliente, direccion, telefono) VALUES('{cliente.nombre}', '{cliente.direccion}', '{cliente.telefono}')"
+        BdI.execute_query(query)
+        loogeinfo = f"-{user}-agregó un cliente: {cliente.nombre}, {cliente.direccion}, {cliente.telefono}"
+        logger.register_log(loogeinfo)
+    except Exception as e:
+        loogeinfo = f"-{user}-error al agregar un cliente - {e}"
+        logger.register_log(loogeinfo)
+
+def listar_clientes(user):
+    print("Lista de clientes")
+    print('id|nombre|direccion|telefono')
+    query = "SELECT * FROM cliente"
+    try:
+        data = BdIv2.get_data(query)
+        loogeinfo = f"-{user}-listó los clientes"
+        logger.register_log(loogeinfo)
+        for i in data:
+            print(i[0], i[1], i[2], i[3])
+    except Exception as e:
+        loogeinfo = f"-{user}-error al listar los clientes - {e}"
+        logger.register_log(loogeinfo)
 
 ## en caso queremos hacer una busqeuda al final del select * from tabla se agrega 
 ## la palabra where 
+        

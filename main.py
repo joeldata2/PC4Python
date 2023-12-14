@@ -1,6 +1,7 @@
 #!pip install pyfiglet
 
 import modulos.bd as bd
+from modulos.jobs import *
 from modulos.proceso import *
 from pyfiglet import Figlet
 
@@ -23,7 +24,9 @@ def main():
         2. Listar productos
         3. Editar nombre de producto 
         4. Eliminar producto
-        5. Salir"""
+        5. Consultar tipo de cambio
+        6. Actualizar tipo de cambio
+        7. Salir"""
         figlet = Figlet()
         figlet.setFont(font='rectangles')
         print(figlet.renderText("Bienvenidos a store DatuxTec"))
@@ -75,10 +78,13 @@ def config():
         CREATE TABLE  IF NOT EXISTS cliente (
                     id_cliente INTEGER PRIMARY KEY,
                     name_cliente VARCHAR(100) NOT NULL,
-                    codigo_postal NVARCHAR(20) NOT NULL,
-                    pais VARCHAR(50) NOT NULL
+                    direccion VARCHAR(200) NOT NULL,
+                    telefono INTEGER NOT NULL
                 );
     """
+    #"""DROP TABLE IF EXISTS cliente;"""
+    
+
 
     database.execute_query(query_products)
     database.execute_query(query_tipo_cambio)
@@ -87,3 +93,14 @@ def config():
 
 if __name__=='__main__':
     main()
+
+
+
+
+if __name__ == "__main__":
+    user = "Joel"  # Reemplaza con el nombre de usuario adecuado
+
+    # Ejecutar directamente las funciones
+    agregar_cliente(user)
+    #listar_clientes(user)
+    config()
