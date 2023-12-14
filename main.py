@@ -38,6 +38,10 @@ def main():
         elif opc==4:
             eliminar_producto(user)
         elif opc==5:
+            consultar_tipo_cambio(user)
+        elif opc==6:
+            actualizar_tipo_cambio(user)
+        elif opc==7:
             salir=True
             print("terminando sesion....")
             break
